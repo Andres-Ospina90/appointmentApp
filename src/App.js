@@ -6,13 +6,13 @@ import AppointmentList from './components/AppointmentList';
 function App() {
 	return (
 		<Fragment>
-			<h1>Appointment App</h1>
+			<h1>Administrador de Pacientes</h1>
 			<div className='container-fluid'>
 				<div className='row'>
-					<div className='col-sm'>
+					<div className='col-sm-3 offset-sm-3'>
 						<AppointmentForm />
 					</div>
-					<div className='col-sm'>
+					<div className='col-sm-3 '>
 						<AppointmentList />
 					</div>
 				</div>
