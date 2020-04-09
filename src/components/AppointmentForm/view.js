@@ -46,8 +46,6 @@ function AppoinmentForm({handleAppointments}) {
 			handleAppointments(cita);
 		}
 
-		//Agregar Id
-
 		//resetear Formulario
 
 		setCita({

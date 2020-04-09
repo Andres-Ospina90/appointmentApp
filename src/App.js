@@ -26,8 +26,8 @@ function App() {
 					<div className='col-sm-4 offset-sm-2'>
 						<AppointmentForm handleAppointments={handleAppointments} />
 					</div>
-					<div className='col-sm-4 '>
-						<AppointmentList />
+					<div className='col-sm-3 offset-1'>
+						<AppointmentList citas={citas} />
 					</div>
 				</div>
 			</div>
