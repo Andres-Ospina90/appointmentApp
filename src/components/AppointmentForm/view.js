@@ -17,9 +17,9 @@ function AppoinmentForm({handleAppointments}) {
 	const {petName, ownerName, date, time, symptoms} = cita;
 
 	const handleChange = (e) => {
-		let inputForm = e.target;
+		const {name, value} = e.target;
 
-		setCita({...cita, [inputForm.name]: inputForm.value.trim()});
+		setCita({...cita, [name]: value});
 	};
 
 	const submitForm = (e) => {
@@ -28,11 +28,11 @@ function AppoinmentForm({handleAppointments}) {
 		// Validación
 
 		if (
-			petName === '' ||
-			ownerName === '' ||
-			date === '' ||
-			time === '' ||
-			symptoms === ''
+			petName.trim() === '' ||
+			ownerName.trim() === '' ||
+			date.trim() === '' ||
+			time.trim() === '' ||
+			symptoms.trim() === ''
 		) {
 			setErrorAlert(true);
 			setTimeout(() => {
@@ -40,13 +40,13 @@ function AppoinmentForm({handleAppointments}) {
 			}, 3000);
 
 			return;
+		} else {
+			cita.id = uuidv4();
+
+			handleAppointments(cita);
 		}
 
 		//Agregar Id
-
-		cita.id = uuidv4();
-
-		handleAppointments(cita);
 
 		//resetear Formulario
 
@@ -75,8 +75,8 @@ function AppoinmentForm({handleAppointments}) {
 						className='form-control'
 						name='petName'
 						placeholder='Nombre de la Mascota'
-						// value={petName}
 						onChange={handleChange}
+						value={petName}
 					></input>
 				</div>
 				<div className='form-group'>
@@ -86,8 +86,8 @@ function AppoinmentForm({handleAppointments}) {
 						className='form-control'
 						name='ownerName'
 						placeholder='Nombre del propietario'
-						// value={ownerName}
 						onChange={handleChange}
+						value={ownerName}
 					></input>
 				</div>
 				<div className='form-group'>
@@ -96,8 +96,8 @@ function AppoinmentForm({handleAppointments}) {
 						type='date'
 						className='form-control'
 						name='date'
-						// value={date}
 						onChange={handleChange}
+						value={date}
 					></input>
 				</div>
 				<div className='form-group'>
@@ -107,8 +107,8 @@ function AppoinmentForm({handleAppointments}) {
 						className='form-control'
 						name='time'
 						placeholder='Nombre de la Mascota'
-						// value={time}
 						onChange={handleChange}
+						value={time}
 					></input>
 				</div>
 				<div className='form-group'>
@@ -117,8 +117,8 @@ function AppoinmentForm({handleAppointments}) {
 						className='form-control'
 						name='symptoms'
 						placeholder='Breve descipción de los sintomas'
-						// value={symptoms}
 						onChange={handleChange}
+						value={symptoms}
 					></textarea>
 				</div>
 				<button type='submit' className='btn btn-primary btn-block'>

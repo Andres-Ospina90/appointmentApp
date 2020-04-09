@@ -9,6 +9,8 @@ function App() {
 	const [citas, setCitas] = useState([]);
 
 	const handleAppointments = (cita) => {
+		Object.keys(cita).map((key) => (cita[key] = cita[key].trim()));
+
 		setCitas([...citas, cita]);
 	};
 
