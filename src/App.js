@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 
 import AppointmentForm from './components/AppointmentForm';
-import AppointmentList from './components/AppointmentList';
+import AppointmentCard from './components/AppointmentCard';
 
 function App() {
 	// Arreglo de citas
@@ -12,6 +12,11 @@ function App() {
 		Object.keys(cita).map((key) => (cita[key] = cita[key].trim()));
 
 		setCitas([...citas, cita]);
+	};
+
+	const deleteAppointment = (id) => {
+		const newCitas = citas.filter((cita) => cita.id !== id);
+		setCitas(newCitas);
 	};
 
 	useEffect(() => {
@@ -27,7 +32,20 @@ function App() {
 						<AppointmentForm handleAppointments={handleAppointments} />
 					</div>
 					<div className='col-sm-3 offset-1'>
-						<AppointmentList citas={citas} />
+						{!citas.length ? (
+							<h2>No hay citas agendadas</h2>
+						) : (
+							<h2>Gestiona tus Citas</h2>
+						)}
+						{citas.map((cita, i) => {
+							return (
+								<AppointmentCard
+									key={i}
+									cita={cita}
+									deleteAppointment={deleteAppointment}
+								/>
+							);
+						})}
 					</div>
 				</div>
 			</div>
