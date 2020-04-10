@@ -6,7 +6,22 @@ import AppointmentCard from './components/AppointmentCard';
 function App() {
 	// Arreglo de citas
 
-	const [citas, setCitas] = useState([]);
+	let citasIniciales = JSON.parse(localStorage.getItem('citas'));
+
+	if (!citasIniciales) {
+		citasIniciales = [];
+	}
+
+	const [citas, setCitas] = useState(citasIniciales);
+
+	useEffect(() => {
+		if (citasIniciales) {
+			localStorage.setItem('citas', JSON.stringify(citas));
+		} else {
+			localStorage.setItem('citas', JSON.stringify([]));
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [citas]);
 
 	const handleAppointments = (cita) => {
 		Object.keys(cita).map((key) => (cita[key] = cita[key].trim()));
@@ -18,10 +33,6 @@ function App() {
 		const newCitas = citas.filter((cita) => cita.id !== id);
 		setCitas(newCitas);
 	};
-
-	useEffect(() => {
-		console.log(citas);
-	}, [citas]);
 
 	return (
 		<Fragment>

@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 
-function AppointmentList({cita, deleteAppointment}) {
+function AppointmentList({cita, deleteAppointment, editAppointment}) {
 	return (
 		<Fragment>
 			<div className='card m-1'>
@@ -26,9 +26,8 @@ function AppointmentList({cita, deleteAppointment}) {
 						{cita.symptoms}
 					</p>
 
-					<button className='btn btn-primary m-1'>Editar</button>
 					<button
-						className='btn btn-danger'
+						className='btn btn-danger btn-block'
 						onClick={() => deleteAppointment(cita.id)}
 					>
 						Eliminar
