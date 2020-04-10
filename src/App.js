@@ -1,12 +1,26 @@
 import React, {Fragment, useState, useEffect} from 'react';
 
 import AppointmentForm from './components/AppointmentForm';
-import AppointmentList from './components/AppointmentList';
+import AppointmentCard from './components/AppointmentCard';
 
 function App() {
 	// Arreglo de citas
 
-	const [citas, setCitas] = useState([]);
+	let citasIniciales = JSON.parse(localStorage.getItem('citas'));
+
+	if (!citasIniciales) {
+		citasIniciales = [];
+	}
+
+	const [citas, setCitas] = useState(citasIniciales);
+
+	useEffect(() => {
+		if (citasIniciales) {
+			localStorage.setItem('citas', JSON.stringify(citas));
+		} else {
+			localStorage.setItem('citas', JSON.stringify([]));
+		}
+	}, [citas, citasIniciales]);
 
 	const handleAppointments = (cita) => {
 		Object.keys(cita).map((key) => (cita[key] = cita[key].trim()));
@@ -14,9 +28,10 @@ function App() {
 		setCitas([...citas, cita]);
 	};
 
-	useEffect(() => {
-		console.log(citas);
-	}, [citas]);
+	const deleteAppointment = (id) => {
+		const newCitas = citas.filter((cita) => cita.id !== id);
+		setCitas(newCitas);
+	};
 
 	return (
 		<Fragment>
@@ -26,8 +41,21 @@ function App() {
 					<div className='col-sm-4 offset-sm-2'>
 						<AppointmentForm handleAppointments={handleAppointments} />
 					</div>
-					<div className='col-sm-4 '>
-						<AppointmentList />
+					<div className='col-sm-3 offset-1'>
+						{!citas.length ? (
+							<h2>No hay citas agendadas</h2>
+						) : (
+							<h2>Gestiona tus Citas</h2>
+						)}
+						{citas.map((cita, i) => {
+							return (
+								<AppointmentCard
+									key={i}
+									cita={cita}
+									deleteAppointment={deleteAppointment}
+								/>
+							);
+						})}
 					</div>
 				</div>
 			</div>

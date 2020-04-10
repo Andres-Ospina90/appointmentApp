@@ -1,4 +1,5 @@
 import React, {Fragment, useState} from 'react';
+import PropTypes from 'prop-types';
 import {v4 as uuidv4} from 'uuid';
 
 function AppoinmentForm({handleAppointments}) {
@@ -45,8 +46,6 @@ function AppoinmentForm({handleAppointments}) {
 
 			handleAppointments(cita);
 		}
-
-		//Agregar Id
 
 		//resetear Formulario
 
@@ -128,5 +127,9 @@ function AppoinmentForm({handleAppointments}) {
 		</Fragment>
 	);
 }
+
+AppoinmentForm.propTypes = {
+	handleAppointments: PropTypes.func.isRequired,
+};
 
 export default AppoinmentForm;
