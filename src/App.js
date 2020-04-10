@@ -20,8 +20,7 @@ function App() {
 		} else {
 			localStorage.setItem('citas', JSON.stringify([]));
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [citas]);
+	}, [citas, citasIniciales]);
 
 	const handleAppointments = (cita) => {
 		Object.keys(cita).map((key) => (cita[key] = cita[key].trim()));

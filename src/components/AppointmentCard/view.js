@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
+import PropTypes from 'prop-types';
 
-function AppointmentList({cita, deleteAppointment, editAppointment}) {
+function AppointmentList({cita, deleteAppointment}) {
 	return (
 		<Fragment>
 			<div className='card m-1'>
@@ -37,5 +38,10 @@ function AppointmentList({cita, deleteAppointment, editAppointment}) {
 		</Fragment>
 	);
 }
+
+AppointmentList.propTypes = {
+	cita: PropTypes.object.isRequired,
+	deleteAppointment: PropTypes.func.isRequired,
+};
 
 export default AppointmentList;
